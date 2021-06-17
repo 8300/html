@@ -8,7 +8,7 @@
 #include <string.h>
 #include <stdbool.h>
 
-#define FILE_INDEX_TEMPLATE "main/index_template.html"
+#define FILE_INDEX_TEMPLATE "main/blog.html"
 #define DEBUG_0(fmt,args...) printf("%s(%d)-%s->"fmt, \
                 __FILE__, __LINE__, __func__, ##args)
 #define DEBUG_ERR(fmt,args...) printf("[ERROR]%s(%d)-%s->"fmt, \
@@ -153,7 +153,7 @@ void process_dir(const char *path, func_file_code ffc, void *ptr)
 		if (type == S_IFDIR) {
 			process_dir(file_path, ffc, ptr);
 			sprintf(buf, 
-		"<a href='%s/index.html'>DIR:%s</a><div style='float:right'>%s</div>",
+		"<a href='%s/index.htm'>DIR:%s</a><div style='float:right'>%s</div>",
 					entry->d_name,
 				      entry->d_name,
 				      ctime(&statbuf.st_mtime)

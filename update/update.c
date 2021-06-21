@@ -15,6 +15,7 @@
                 __FILE__, __LINE__, __func__, ##args)
 typedef void (*func_file_code)(const char *fine);
 
+char *file_index;
 void get_file_path(const char *path, const char *file_name,  char *file_path)
 {
     strcpy(file_path, path);
@@ -124,7 +125,7 @@ void process_dir(const char *path, func_file_code ffc, void *ptr)
 	FILE *Fsrc = NULL;
 
 	sprintf(dest, "%s/index.html", path);
-	copy_file(FILE_INDEX_TEMPLATE, dest);
+	copy_file(file_index, dest);
 	sprintf(dest, "%s/index.htm", path);
 	Fdest = fopen(dest, "w");
 	if (ptr != NULL) {
@@ -172,10 +173,11 @@ void main(int argc, char **argv)
 	//char *p = "pre.html";
 	char *p = "main/pre_cn.html";
 	//	p = NULL;
-	if (argc > 1) {
+	if (argc > 2) {
+		file_index = argv[2];
 		process_dir(argv[1], NULL, p);
 		process_file(argv[1], NULL, NULL);
 	} else {
-		printf("Usage: update [PATH]\n");
+		printf("Usage: update [PATH] [index path]\n");
 	}
 }

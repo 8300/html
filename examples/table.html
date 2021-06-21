@@ -1,0 +1,125 @@
+<HTML>
+<HEAD>
+	<meta charset="utf-8" />
+	<title>网关配置</title>
+</HEAD>
+<BODY>
+	<h1 align="center">建科博瑞：网关配置</h1><br><br>
+	<div align="right">
+		<input type="submit" name="reboot" value="重启" />
+	</div>
+<form id="form1" name="form1" method="post" action="">
+<fieldset>
+<legend>配置</legend>
+	配置来源：
+<select name="select" id="select" onchange="b();">
+  <option value="0">数据库</option>
+  <option value="1">服务器</option>
+</select>
+</fieldset>
+
+<fieldset>
+<legend>数据库主站配置</legend>
+	<table id="oTable" style="background-color:#eeeeee;" bordercolor="#aaaaaa" border="1" cellpadding="0" cellpadding="2" width="100%">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>IP</th>
+				<th>端口号</th>
+				<th>帐号</th>
+				<th>密码</th>
+				<th>删除</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr id="st" style="display:none">
+				<td><div>0</div></td>
+				<td><div contenteditable="true"></div></td>
+				<td><div contenteditable="true"></div></td>
+				<td><div contenteditable="true"></div></td>
+				<td><div contenteditable="true"></div></td>
+				<td><div contenteditable="true"></div></td>
+			</tr>
+		</tbody>
+	</table>
+	<input id="add" type="button" onClick="addRow();" style="font-size:16px;" value="新增(+)"/>
+	<input type="button" name="Submit22" value="重置" onclick="window.location.reload()" />
+
+</fieldset>
+<div align="center">
+	<input type="submit" name="Submit3" value="提交" onclick="GetTableData(document.getElementById('tabProduct'));return false;" />
+</div>
+</form>
+</BODY>
+<script LANGUAGE="JAVASCRIPT">
+iIndex = 0; //试验一下加了int类型定义后如何？？？
+var i= 0;
+	function b(){
+		var myselect=document.getElementById("select");
+		var index=myselect.selectedIndex ;
+		var values = myselect.options[index].value; 
+		var dk = document.getElementById("add");
+		var std = document.getElementById("st");
+		if(values == 1){
+			std.style.display="";
+			dk.style.display="none";
+		}else{
+			std.style.display="none";
+			dk.style.display="";
+		}
+	}
+function getIndex(){
+	iIndex = event.srcElement.parentElement.parentElement.rowIndex;
+	return iIndex;
+}
+function delRow(iPos){
+	document.all.oTable.deleteRow(iPos);
+	i--;
+}
+function addRow(iPos){
+	var otr=oTable.insertRow(i + 1);
+	var ocell=otr.insertCell(0);
+	ocell.innerHTML="<div contenteditable='false'>"+i+"</div>";
+	var ocell=otr.insertCell(1);
+	ocell.innerHTML="<div contenteditable='true'></div>"
+	var ocell=otr.insertCell(2);
+	ocell.innerHTML="<div contenteditable='true'></div>"
+	var ocell=otr.insertCell(3);
+	ocell.innerHTML="<div contenteditable='true'></div>"
+	var ocell=otr.insertCell(4);
+	ocell.innerHTML="<div contenteditable='true'></div>"
+	var ocell=otr.insertCell(5);
+	ocell.innerHTML=" <input type=button onclick=delRow(getIndex()) value='删除"+i+"'>";
+	i++;
+}
+
+function GetTableData(table){
+	var tableData = new Array();
+	alert("行数：" + table.rows.length);
+	for(var i=1; i<table.rows.length;i++){
+		tableData.push(GetRowData(tabProduct.rows[i]));
+	}
+	return tableData;
+}
+
+//提取指定行的数据，JSON格式
+function GetRowData(row){
+	var rowData = {};
+	for(var j=0;j<row.cells.length; j++){
+		name = row.parentNode.rows[0].cells[j].getAttribute("Name");
+		if(name){
+			var value = row.cells[j].getAttribute("Value");
+			if(!value){
+				value = row.cells[j].innerHTML;
+			}
+			rowData[name] = value;
+		}
+	}
+	//alert("ProductName:" + rowData.ProductName);
+	//或者这样：alert("ProductName:" + rowData["ProductName"]);
+	return rowData;
+}
+
+</SCRIPT>
+</HTML>
+ 

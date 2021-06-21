@@ -1,0 +1,41 @@
+<div style="width:900px; height:500px; margin:0 auto; background:yellow;">
+<select name="select" id="select" onchange="b();">
+	<option value="0" >请选择</option>
+	<option value ="1">二环北路</option>
+</select>
+<span id="c0" style="display:none;">沃尔玛</span>
+<span id="c1" style="display:none;">2</span>
+<span id="c2" style="display:none;">38</span>
+
+离你最近的超市：
+<span id="a0" style="color:red"></span>
+如果你乘公交车，将花费
+<span id="a1" style="color:red"></span>
+用掉你
+<span id="a2" style="color:red"></span>
+
+</div>
+<div id="name"><p>how do you do！</p></div>
+
+<script language="javascript">
+	function b(){
+		var myselect=document.getElementById("select");
+		var index=myselect.selectedIndex ;
+		var values = myselect.options[index].value; 
+		if(values == 1){
+			for(i=0;i<=2;i++){
+				var j="c"+i;
+				var k="a"+i;
+				var ak = document.getElementById(k);
+				var cj = document.getElementById(j);
+				ak.innerHTML = cj.innerHTML;
+			}
+		}else{
+			for(i=0;i<=2;i++){
+				var k="a"+i;
+				var dk = document.getElementById(k);
+				dk.innerHTML = "---";
+			}
+		}
+	}
+</script> 

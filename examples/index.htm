@@ -1,7 +1,29 @@
 <!DOCTYPE html>
 <head>
-    <meta charset="UTF-8">
+	<meta charset="UTF-8">
+	<script>
+		function load() {
+			var menu = document.getElementById("menu");
+			if(self!=top){
+				menu.style.display='none';
+				console.log("not show");
+			} else {
+				menu.style.display="block";
+				console.log("show");
+			}
+		}
+	</script>
 </head>
-<br><a href='title_change.html'>00.title_change.html</a><div style='float:right'>Thu Jun 17 12:06:55 2021
-</div><br>
+<body onload="load()">
+	<button onclick="load()">点我</button>
+	<div id="menu">
+	..	f2223
+	</div>
+	<br><a href='title_change.html'>00.title_change.html</a><div style='float:right'>Thu Jun 17 12:06:55 2021
+	</div><br>
 </body>
+<!--
+	<div id="menu" onload="document.all.menu.style.display=(self!=top)?'':'none'">
+	<button onclick="uload()">点我</button>
+	document.getElementById("menu1").style.display="none";
+-->

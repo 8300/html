@@ -16,6 +16,13 @@ div_left{
 	left: 1%;
 	top: 1%;
 }
+.left_top{
+	float:left;
+	width: 4%;
+	height: 100%;
+	left: 1%;
+	top: 1%;
+}
 
 div_middle{
 	margin: 2% 2% 2% 8%;

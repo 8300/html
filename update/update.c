@@ -92,7 +92,7 @@ int index_html_create(char *path, char *pre)
 	//show file
 	while((entry = readdir(dir)) != NULL) {
 		get_file_path(path, entry->d_name, file_path);
-		if (strncmp("index.htm", entry->d_name, 9) == 0)
+		if (strncmp("index.html", entry->d_name, 9) == 0)
 			continue;
 		if(is_special_dir(entry->d_name))
 			continue;

@@ -1,0 +1,50 @@
+<h1>sign in</h1>
+<base href="http://39.99.206.18:14444"/>
+<p id="demo"> demo </p>
+<hr />
+	<table>
+		<tr>
+			<td>id</td>
+			<td>
+				<input id="id" type = "text" name = "newinput" 
+				     autofocus/>
+			</td>
+		</tr>
+		<tr>
+			<td>Password</td>
+			<td>
+				<input id="pwd" type = "text" name = "newinput1"/>
+			</td>
+		</tr>
+	</table>
+	<input id="submit" type = "submit" value = "submit" />
+<script LANGUAGE="JAVASCRIPT">
+
+submit.onclick = function(){
+	var xhttp = new XMLHttpRequest();
+	xhttp.open("GET", "/cgi/account/sign_in", false);
+	var obj = {"id":'2',"pwd":"fsfd"};
+	obj.id = id.value;
+	obj.pwd = pwd.value;
+	console.log(JSON.stringify(obj));
+	xhttp.send(JSON.stringify(obj));
+	document.getElementById("demo").innerHTML = xhttp.responseText;
+}
+
+window.addEventListener("message",function(e){
+	e.preventDefault();
+	document.getElementById("test").innerHTML = "从" + e.origin + "那里传过来的消息:\n" + e.data;
+},false);
+</SCRIPT>
+<!--
+sign_in_submit.onclick = function(){
+	var id = document.getElementById('id');
+	var pwd = document.getElementById('pwd');
+	var sign = document.getElementById('sign_in');
+	var obj = {"id":'2',"pwd":"fsfd"};
+	obj.id = id.value;
+	obj.pwd = pwd.value;
+	console.log(JSON.stringify(obj));
+	post("/cgi/account/sign_in", JSON.stringify(obj));
+}
+-->

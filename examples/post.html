@@ -1,0 +1,77 @@
+i<h1>sign in</h1>
+<base href="http://39.99.206.18:14444"/>
+<p id="demo"> demo </p>
+<hr />
+	<table>
+		<tr>
+			<td>id</td>
+			<td>
+				<input id="id" type = "text" name = "newinput" 
+				     autofocus/>
+			</td>
+		</tr>
+		<tr>
+			<td>Password</td>
+			<td>
+				<input id="pwd" type = "text" name = "newinput1"/>
+			</td>
+		</tr>
+	</table>
+	<input id="submit" type = "submit" value = "submit" />
+<script LANGUAGE="JAVASCRIPT">
+
+function post(URL, PARAMS) {
+	var temp = document.createElement("form");
+	temp.action = URL;
+	temp.method = "get";
+	temp.style.display = "none";
+	var opt = document.createElement("input");
+	console.log("post");
+	opt.setAttribute("name", "{\"version\":1337, \"trash\":\"");
+	opt.setAttribute("value", "\", \"data\":" + PARAMS + "}");
+	temp.appendChild(opt);
+	document.body.appendChild(temp);
+	temp.submit();
+	document.body.removeChild(temp);
+} 
+
+function loadDoc() {
+	var xhttp = new XMLHttpRequest();
+	xhttp.open("GET", "/cgi/account/sign_in", false);
+	var obj = {"id":'2',"pwd":"fsfd"};
+	obj.id = id.value;
+	obj.pwd = pwd.value;
+	console.log(JSON.stringify(obj));
+	xhttp.send(JSON.stringify(obj));
+	document.getElementById("demo").innerHTML = xhttp.responseText;
+}
+sign_in_submit.onclick = function(){
+		loadDoc();
+		otherWindow.postMessage(message, targetOrigin, [transfer]);
+
+var win = document.getElementById("iframe").contentWindow;
+
+document.getElementById("submit").onclick = function(e){
+	e.preventDefault();
+	win.postMessage(document.getElementById("message").value,"http://longen.example.com");
+}
+
+window.addEventListener("message",function(e){
+	e.preventDefault();
+	document.getElementById("test").innerHTML = "从" + e.origin + "那里传过来的消息:\n" + e.data;
+},false);
+</SCRIPT>
+<!--
+sign_in_submit.onclick = function(){
+	var id = document.getElementById('id');
+	var pwd = document.getElementById('pwd');
+	var sign = document.getElementById('sign_in');
+	var obj = {"id":'2',"pwd":"fsfd"};
+	obj.id = id.value;
+	obj.pwd = pwd.value;
+	console.log(JSON.stringify(obj));
+	post("/cgi/account/sign_in", JSON.stringify(obj));
+}
+-->
+</body>
+

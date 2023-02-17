@@ -1,0 +1,18 @@
+<h1>sign in</h1>
+<base href="http://192.168.1.96:19715"/>
+<p id="demo"> demo </p>
+<hr />
+<input id="submit" type = "submit" value = "submit" />
+<script LANGUAGE="JAVASCRIPT">
+submit.onclick = function(){
+	var xhttp = new XMLHttpRequest();
+	var array = [], a0 = [], obj = {};
+	var table, tmp;
+	let storage = window.localStorage;
+	xhttp.open("post", "/v1/CamControl/CamCtrlStep" , false);
+	xhttp.send("ss");
+	console.log("response:" + xhttp.responseText);
+}
+</script>
+</body>
+

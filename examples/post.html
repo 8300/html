@@ -2,13 +2,25 @@
 	<title>post online test</title>
 	<h1>post online test</h1>
 	<input id="submit" type="submit" value="Submit" />
-	<input id="url" type="text" style="width:340" value="http://192.168.1.209/html/cgi/setting/history_tree" /><br>
+	<input id="url" type="text" style="width:340" value="http://127.0.0.1:8080/setting/history_tree" /><br>
 	content:<br/>
-	<textarea name="comments" id="content" style="width:400px;height:80px">
-	input post content!
+	<textarea name="comments" id="content" style="width:80%;height:30%">
+{
+	"verison": "1.0.0",
+	"data": [{
+		"ip": "1.1.1.1",
+		"port": "22",
+		"user": "ss",
+		"pwd": "ss",
+		"id": "zs",
+		"topic": "1.0.0/web/collectors/control",
+		"msg": "{\"verison\":\"1.0.0\",\"data\":[{\"id\":\"38\"}],\"method\":\"control\"}"
+	}],
+	"method": "post_mqtt"
+}
 	</textarea><br/>
 	response:<br/>
-	<textarea name="comments" id="response" style="width:400px;height:80px">
+	<textarea name="comments" id="response" style="width:80%;height:30%">
 	no response!
 	</textarea><br/>
 	<script LANGUAGE="JAVASCRIPT">
@@ -19,7 +31,11 @@
 			console.log("url:" + url.value);
 			console.log("content:" + content.value);
 			var xhttp = new XMLHttpRequest();
-			xhttp.open("post", url.value, false);
+			xhttp.open("POST", url.value, false);
+			//xhttp.setRequestHeader('content-type', 'application/json');
+			//xhttp.send(JSON.stringify(content.value));
+			//xhttp.setRequestHeader('content-type', 'x-www-form-urlencoded');
+			xhttp.setRequestHeader('content-type', 'text/plain');
 			xhttp.send(content.value);
 			response.value = xhttp.responseText;
 			console.log("response:" + xhttp.responseText);
